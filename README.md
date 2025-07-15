@@ -1,55 +1,58 @@
-# LawVriksh Backend Intern Assignment – Credit Management API
 
-This project is part of the LawVriksh Backend Internship assignment.
-It implements a FastAPI-based backend with PostgreSQL for tracking user credits for platform activities.
+# 📚 LawVriksh Backend Intern Assignment – Credit Management API
+
+This project is part of the LawVriksh Backend Internship assignment.  
+It implements a **FastAPI** backend with **PostgreSQL** for managing user credits based on platform activities.
 
 ---
 
 ## 🚀 Features
 
-* RESTful API using **FastAPI**
-* Persistent storage with **PostgreSQL**
-* Daily background job to add 5 credits to all users at **UTC midnight**
-* Endpoints to **add**, **deduct**, **reset**, and **fetch** credits
-* Schema file for easy table creation
+- RESTful API using **FastAPI**
+- Persistent storage with **PostgreSQL**
+- Daily background job to **add 5 credits** to all users at **UTC midnight**
+- Endpoints to **add**, **deduct**, **reset**, and **fetch** credits
+- Provided **schema file** for easy DB setup
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Language**: Python 3.12+
-* **Framework**: FastAPI
-* **Database**: PostgreSQL
-* **ORM**: SQLAlchemy
-* **Scheduler**: APScheduler
+- **Language**: Python 3.12+
+- **Framework**: FastAPI
+- **Database**: PostgreSQL
+- **ORM**: SQLAlchemy
+- **Scheduler**: APScheduler
 
----
+
 
 ## 🧑‍💻 Setup Instructions
 
-### 🧪 Virtual Environment
+### 1️⃣ Virtual Environment
 
-#### On Linux/macOS:
+**Linux/macOS:**
 
 ```bash
 python3 -m venv env
 source env/bin/activate
-```
+````
 
-#### On Windows:
+**Windows:**
 
 ```cmd
 python -m venv env
 env\Scripts\activate
-```
 
-### 📦 Install Requirements
+
+### 2️⃣ Install Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 🐘 Setup PostgreSQL Database
+
+
+### 3️⃣ Setup PostgreSQL Database
 
 ```bash
 # Create the database
@@ -62,7 +65,9 @@ cp /home/hp/workspace/backend-intern-credits/src/schema.sql /tmp/schema.sql
 sudo -u postgres psql -d creditdb -f /tmp/schema.sql
 ```
 
-### 🔐 Create .env File
+---
+
+### 4️⃣ Create `.env` File
 
 Create a `.env` file in your `src/` directory with the following content:
 
@@ -74,53 +79,86 @@ DATABASE_URL=postgresql://USERNAME:PASSWORD@DATABASE_ADDRESS/DATABASE_NAME
 CORS_ORIGINS=ALLOWED_ORIGINS
 ```
 
-### ▶️ Run the App
+---
+
+### 5️⃣ Run the App
 
 ```bash
 cd src
 uvicorn main:app --reload
 ```
 
-> **Note:** `main.py` should have `APScheduler` job initialized.
+> **Note:** `main.py` should have the `APScheduler` job initialized.
 
 ---
 
-## 🧪 API Endpoints & CURL Requests
-### 'GET /auth/google - Oauth authentication 
-Go to browers and login using any google account
-Copy Access Token 
-![Alt Text](images/auth_google.png)
+## 🧪 API Endpoints & Screenshots
 
-## After Login copy access token
-![Alt Text](images/accesstoken.png)
+### `GET /auth/google` — OAuth Authentication
 
+1️⃣ Open in your browser and log in with a Google account.
+2️⃣ Copy the generated Access Token.
 
-### `GET /api/credits/{user_id}` – Get User Credits
+![Login Screen](images/auth_google.png)
 
-### `POST /api/credits/{user_id}/add` – Add Credits
+### After Login — Copy Access Token
 
-### `POST /api/credits/{user_id}/deduct` – Deduct Credits
-
-### `PATCH /api/credits/{user_id}/reset` – Reset Credits
-
-### `POST /api/schema/update` – Update Schema (optional)
+![Access Token](images/accesstoken.png)
 
 ---
 
+### Main Endpoints
+
+* **`GET /api/credits/{user_id}`** — Get User Credits
+* **`POST /api/credits/{user_id}/add`** — Add Credits
+* **`POST /api/credits/{user_id}/deduct`** — Deduct Credits
+* **`PATCH /api/credits/{user_id}/reset`** — Reset Credits
+* **`POST /api/schema/update`** — Update Schema (optional)
+
 ---
-### API Testing
-## Swagger UI 
+
+## ⚙️ API Testing (Swagger UI)
+
+Test the API directly using the **Swagger UI**:
+
 ```
 http://localhost:8000/docs
 ```
 
 ---
 
+## 🗂️ Architecture Diagram
+
+```mermaid
+graph TD
+  A[Client (Browser / Postman)] -->|HTTP Requests| B[FastAPI Backend]
+  B --> C[Google OAuth (Auth)]
+  B --> D[PostgreSQL Database]
+  B --> E[APScheduler (Daily Job)]
+  E --> D
+```
+
+---
+
+## 🔄 Flow Diagram
+
+```mermaid
+flowchart TD
+    A[User] --> B[Google OAuth]
+    B --> C[Access Token]
+    C --> D[API Request]
+    D --> E[FastAPI Handles Request]
+    E --> F[PostgreSQL DB]
+    F --> G[Response]
+```
+
+---
+
 ## ⏰ Scheduled Task
 
-* A background job runs daily at **midnight UTC**
-* It adds **5 credits to all users**
-* Updates `last_updated` column accordingly
+* Runs daily at **midnight UTC**
+* Adds **5 credits** to every user
+* Updates the `last_updated` column accordingly
 
 ---
 
@@ -129,19 +167,22 @@ http://localhost:8000/docs
 ```
 backend-intern-credits/
 ├── src/
-|   |─────api/
-|   |      |── auth.py
-|   |      └── routes.py
-│   ├── main.py
+│   ├── api/
+│   │   ├── auth.py
+│   │   └── routes.py
+│   ├── autoupdate.py
 │   ├── database.py
+│   ├── main.py
 │   ├── models.py
 │   ├── schemas.py
-│   ├── autoupdate.py
 │   ├── utils.py
 │   ├── LawVriksh_Credit_API.postman_collection.json
 │   ├── requirements.txt
 │   └── schema.sql
-|── .gitignore
+├── images/
+│   ├── auth_google.png
+│   ├── accesstoken.png
+├── .gitignore
 └── README.md
 ```
 
@@ -149,17 +190,15 @@ backend-intern-credits/
 
 ## ✅ Deliverables
 
-* `src/` folder with all source code
-* `schema.sql` for DB setup
-* Postman Collection (manually test endpoints and export collection)
-* Report (optional PDF or markdown)
+* `src/` folder with complete source code
+* `schema.sql` for easy DB setup
+* Postman Collection for endpoint testing
 
 ---
 
-## 📌 Author
+## ✍️ Author
 
-Apurva singh
-apurvanaruka1@gmail.com
+**Apurva Singh**
+📧 [apurvanaruka1@gmail.com](mailto:apurvanaruka1@gmail.com)
 
 ---
-
