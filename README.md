@@ -127,17 +127,6 @@ http://localhost:8000/docs
 
 ---
 
-## 🗂️ Architecture Diagram
-
-```mermaid
-graph TD
-  A[Client (Browser / Postman)] -->|HTTP Requests| B[FastAPI Backend]
-  B --> C[Google OAuth (Auth)]
-  B --> D[PostgreSQL Database]
-  B --> E[APScheduler (Daily Job)]
-  E --> D
-```
-
 ---
 
 ## 🔄 Flow Diagram
