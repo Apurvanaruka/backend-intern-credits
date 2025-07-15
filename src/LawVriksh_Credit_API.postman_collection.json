@@ -1,0 +1,142 @@
+{
+  "info": {
+    "_postman_id": "12345678-aaaa-bbbb-cccc-123456789abc",
+    "name": "LawVriksh Credit Management API",
+    "description": "Postman Collection for testing LawVriksh Backend Intern Assignment – Credit Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Google OAuth Login",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/auth/google",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["auth", "google"]
+        }
+      }
+    },
+    {
+      "name": "Get User Credits",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ACCESS_TOKEN",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/credits/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "credits", "1"]
+        }
+      }
+    },
+    {
+      "name": "Add Credits",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ACCESS_TOKEN",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 10\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/credits/1/add",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "credits", "1", "add"]
+        }
+      }
+    },
+    {
+      "name": "Deduct Credits",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ACCESS_TOKEN",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 5\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/credits/1/deduct",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "credits", "1", "deduct"]
+        }
+      }
+    },
+    {
+      "name": "Reset Credits",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ACCESS_TOKEN",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/credits/1/reset",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "credits", "1", "reset"]
+        }
+      }
+    },
+    {
+      "name": "Update Schema (Optional)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ACCESS_TOKEN",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/schema/update",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "schema", "update"]
+        }
+      }
+    }
+  ]
+}
